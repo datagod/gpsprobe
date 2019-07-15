@@ -7,9 +7,6 @@
  </PRE>                                                                            
 
 
-# gpsprobe
-GPSProbe allows you to record GPS, MAC address, signal strength etc. of wifi enabled devices nearby.  
-
 
 ![Raspberry Pi Buildout](https://github.com/datagod/gpsprobe/blob/master/GPSProbe%20Pi3.jpg)
 
