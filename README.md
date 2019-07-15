@@ -1,13 +1,13 @@
 # gpsprobe
 GPSProbe allows you to record GPS, MAC address, signal strength etc. of wifi enabled devices nearby.  
 
-
+<PRE>
    ____ ____  ____  ____  ____   ___  ____  _____                           
   / ___|  _ \/ ___||  _ \|  _ \ / _ \| __ )| ____|                          
  | |  _| |_) \___ \| |_) | |_) | | | |  _ \|  _|                            
  | |_| |  __/ ___) |  __/|  _ <| |_| | |_) | |___                           
   \____|_|   |____/|_|   |_| \_\\___/|____/|_____|                          
-                                                                            
+ </PRE>                                                                            
                                                                             
   A passive surveillance tool that tracks wifi enabled devices nearby,      
   GPSProbe records the MAC addresses, GPS co-ordinates and other pertinent  
