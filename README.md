@@ -42,3 +42,8 @@ An example of GPSProbe running on a Raspberry Pi3 with an external Wifi antenna,
     project that I have since lost track.  I will certainly give them       
     full credit when I track them down                                     
 
+
+
+
+# Sample Output
+![Sample Output](https://github.com/datagod/gpsprobe/blob/master/images/GPSlog.jpg?raw=true)
