@@ -9,6 +9,7 @@
 
 
 ![Raspberry Pi Buildout](https://github.com/datagod/gpsprobe/blob/master/GPSProbe%20Pi3.jpg)
+
 An example of GPSProbe running on a Raspberry Pi3 with an external Wifi antenna, GPS, and a Unicornhat HD display.
 
   A passive surveillance tool that tracks wifi enabled devices nearby,      
