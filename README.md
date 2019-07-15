@@ -1,6 +1,10 @@
 # gpsprobe
 GPSProbe allows you to record GPS, MAC address, signal strength etc. of wifi enabled devices nearby.  
 
+
+
+
+
 <PRE>
    ____ ____  ____  ____  ____   ___  ____  _____                           
   / ___|  _ \/ ___||  _ \|  _ \ / _ \| __ )| ____|                          
@@ -37,7 +41,5 @@ GPSProbe allows you to record GPS, MAC address, signal strength etc. of wifi ena
                                                                             
   - GPS polling code and thread spawning code was borrowed from another     
     project that I have since lost track.  I will certainly give them       
-    full credit when I track them down                                     --
-                                                                            --
-                                                                            --
+    full credit when I track them down                                     
 
