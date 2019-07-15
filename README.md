@@ -22,7 +22,7 @@ An example of GPSProbe running on a Raspberry Pi3 with an external Wifi antenna,
   - optional tracking of GPS co-ordinates                                   
   - tracks routers as well as mobile devices                                
                                                                             
-  Optional Unicoirn hat HD display                                          
+  Optional Unicorn hat HD display                                          
   - leverages code from Arcade Retro Clock to display device counts,        
     signal counts, and packet counts                                        
                                                                             
