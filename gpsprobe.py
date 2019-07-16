@@ -32,11 +32,14 @@
 #  - Arcade Retro Clock HD has not been released as of July 2019 but I have  --
 #    included some functions and objects required to display scrolling       --
 #    alphanumerics and strength bars.                                        --
-#    https://github.com/datagod/Arcade-Retro-Clock                           --                                           --
+#    https://github.com/datagod/Arcade-Retro-Clock                           --
+#                                                                            --
+#  - Portions of ProbeQuest were used to get the MAC organization            --
+#    https://github.com/SkypLabs/probequest                                  --
 #                                                                            --
 #  - GPS polling code and thread spawning code was borrowed from another     --
 #    project that I have since lost track.  I will certainly give them       --
-#    full credit when I track them down                                     --
+#    full credit when I track them down                                      --
 #                                                                            --
 #                                                                            --
 #------------------------------------------------------------------------------
