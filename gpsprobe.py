@@ -129,7 +129,7 @@ if(args.gps):
   UseGPS = True
 
 if (args.unicornhat):
-  import arcadeclock
+  import arcaderetroclock
   HatDisplay = True
 
 DEBUG = args.debug
