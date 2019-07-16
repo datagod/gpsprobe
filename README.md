@@ -47,3 +47,18 @@ An example of GPSProbe running on a Raspberry Pi3 with an external Wifi antenna,
 
 # Sample Output
 ![Sample Output](https://github.com/datagod/gpsprobe/blob/master/images/GPSlog.jpg?raw=true)
+
+
+# Dependencies
+netaddr - https://github.com/drkjam/netaddr
+scapy - https://github.com/secdev/scapy
+
+# Quick install of dependencies
+git clone https://github.com/drkjam/netaddr
+cd netaddr
+sudo python setup.py install
+cd
+git clone https://github.com/secdev/scapy.git
+cd scapy
+sudo python setup.py install
+
