@@ -54,6 +54,7 @@ netaddr - https://github.com/drkjam/netaddr
 scapy - https://github.com/secdev/scapy
 
 # Quick install of dependencies
+<pre>
 git clone https://github.com/drkjam/netaddr
 cd netaddr
 sudo python setup.py install
@@ -61,4 +62,4 @@ cd
 git clone https://github.com/secdev/scapy.git
 cd scapy
 sudo python setup.py install
-
+</pre>
