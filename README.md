@@ -42,7 +42,7 @@ Details of the captured packets are shown in a series of ncurses windows.
 
 ![Sample Output](https://github.com/datagod/gpsprobe/blob/master/images/GPSlog.jpg?raw=true)
 
-![Sample Output2](https://github.com/datagod/gpsprobe/blob/master/images/GPSLog TextWindows.jpg?raw=true)
+![Sample Output2](https://github.com/datagod/gpsprobe/blob/master/images/GPSLog%20TextWindows.jpg?raw=true)
 
 
 # Dependencies
