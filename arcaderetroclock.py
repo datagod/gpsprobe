@@ -12,12 +12,29 @@
 #                                                                            --
 #   Copyright 2019 William McEvoy                                            --
 #                                                                            --
-#                                                                            --
+#   Version: 1.0                                                             --
+#------------------------------------------------------------------------------
+#   Version: 1.1                                                             --
+#   Reason:  Wrapped error handling around the unicorn hat display function  --
+#------------------------------------------------------------------------------
+#   Version: 1.2                                                             --
+#   Date:    April 24, 2020                                                  --
+#   Reason:  Removed print statements                                        --
+#------------------------------------------------------------------------------
+#   Version: 1.3                                                             --
+#   Date:    May4, 2020                                                      --
+#   Reason:  Migrate to Python3                                              --
 #------------------------------------------------------------------------------
 
 
 import unicornhathd as unicorn
 import time
+
+
+#--------------------------------------
+# Global Variables                   --
+#--------------------------------------
+ScrollSleep = 0.07
 
 
 #--------------------------------------
@@ -28,6 +45,8 @@ HatWidth, HatHeight = unicorn.get_shape()
 unicorn.set_layout(unicorn.AUTO)
 unicorn.rotation(180)
 unicorn.brightness(1)
+
+
 
 
 
@@ -95,9 +114,7 @@ def ClockTimer(seconds):
   
   
   
-  
-  
-  
+   
   
   
   
@@ -131,7 +148,31 @@ class Sprite(object):
       elif self.grid[count] == 0:
         if (CheckBoundary(x+h1,y+v1) == 0):
           setpixel(x+h1,y+v1,0,0,0)
-    unicorn.show()
+    
+    try:
+      unicorn.show()
+    
+    except Exception as ErrorMessage:
+      TheTrace = traceback.format_exc()
+      print("")
+      print("")
+      print("--------------------------------------------------------------")
+      print("ERROR - Unicorn.show")
+      print(ErrorMessage)
+      print("")
+      #print("EXCEPTION")
+      #print(sys.exc_info())
+      print("")
+      print ("TRACE")
+      print (TheTrace)
+      print("--------------------------------------------------------------")
+      print("")
+      print("")
+      unicorn.clear()
+      ShowScrollingBanner("Display Error!",100,0,0,0.05)
+      
+      
+    
 
 
   def Display(self,h1,v1):
@@ -179,21 +220,42 @@ class Sprite(object):
         if (CheckBoundary(x+h1,y+v1) == 0):
           #setpixel(x+h1,y+v1,0,0,0)
           setpixel(x+h1,y+v1,0,0,0)
-    unicorn.show()
-
+    try:
+      unicorn.show()
+    
+    except Exception as ErrorMessage:
+      TheTrace = traceback.format_exc()
+      print("")
+      print("")
+      print("--------------------------------------------------------------")
+      print("ERROR - Unicorn.show")
+      print(ErrorMessage)
+      print("")
+      #print("EXCEPTION")
+      #print(sys.exc_info())
+      print("")
+      print ("TRACE")
+      print (TheTrace)
+      print("--------------------------------------------------------------")
+      print("")
+      print("")
+      unicorn.clear()
+      ShowScrollingBanner("Display Error!",100,0,0,0.05)
+      
+      
   def HorizontalFlip(self):
     x = 0
     y = 0
     flipgrid = []
     
-    print ("flip:",self.width, self.height)
+    #print ("flip:",self.width, self.height)
     for count in range (0,(self.width * self.height)):
       y,x = divmod(count,self.width)
       #print("Count:",count,"xy",x,y)
       #print("Calculations: ",(y*self.height)+ self.height-x-1)  
       flipgrid.append(self.grid[(y*self.height)+ self.height-x-1])  
-    print("Original:", str(self.grid))
-    print("Flipped :", str(flipgrid))
+    #print("Original:", str(self.grid))
+    #print("Flipped :", str(flipgrid))
     self.grid = flipgrid      
 
     
@@ -223,9 +285,30 @@ class Sprite(object):
 
         #draw new sprite
         self.Display(h,v)
-        unicorn.show()
+        
+        try:
+          unicorn.show()
+          
+        except Exception as ErrorMessage:
+          TheTrace = traceback.format_exc()
+          print("")
+          print("")
+          print("--------------------------------------------------------------")
+          print("ERROR - Unicorn.show")
+          print(ErrorMessage)
+          print("")
+          #print("EXCEPTION")
+          #print(sys.exc_info())
+          print("")
+          print ("TRACE")
+          print (TheTrace)
+          print("--------------------------------------------------------------")
+          print("")
+          print("")
+          unicorn.clear()
+          ShowScrollingBanner("Display Error!",100,0,0,delay)
+        
         time.sleep(delay)
-
 
         
 
@@ -369,6 +452,15 @@ def ShowScrollingBanner(TheMessage,r,g,b,ScrollSpeed):
   TheBanner.g = g 
   TheBanner.b = b 
   TheBanner.ScrollAcrossScreen(HatWidth-1,1,"left",ScrollSpeed)
+
+
+def ShowScrollingBannerV(TheMessage,r,g,b,V,ScrollSpeed):
+  TheMessage = TheMessage.upper()
+  TheBanner = CreateBannerSprite(TheMessage)
+  TheBanner.r = r 
+  TheBanner.g = g 
+  TheBanner.b = b 
+  TheBanner.ScrollAcrossScreen(HatWidth-1,V,"left",ScrollSpeed)
 
 
 
@@ -718,7 +810,7 @@ def TrimSprite(Sprite1):
       i = x + (y * width)
       
       BufferColumn[y] = Sprite1.grid[i]
-      if (Sprite1.grid[i] <> 0):
+      if (Sprite1.grid[i] != 0):
         Empty = 0
     
     if (Empty == 0):
@@ -792,7 +884,7 @@ def LeftTrimSprite(Sprite1,Columns):
       i = x + (y * width)
       
       BufferColumn[y] = Sprite1.grid[i]
-      if (Sprite1.grid[i] <> 0):
+      if (Sprite1.grid[i] != 0):
         Empty = 0
     
     if (Empty == 0 or EmptyCount > Columns):
@@ -887,7 +979,7 @@ def ShowShortMessage(RaceWorld,PlayerCar,ShortMessage):
     RaceWorld.DisplayWindowWithSprite(PlayerCar.h-7,PlayerCar.v-7,ShortMessageSprite)
     MoveMessageSprite(moves,ShortMessageSprite)
     moves = moves + 1
-    print ("Message On")
+    #print ("Message On")
     
   ShortMessageSprite.on = 0
 
