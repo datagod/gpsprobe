@@ -20,12 +20,15 @@ sudo airmon-ng start wlan1
 echo "checking for interfering processes"
 sudo airmon-ng check kill
 
-echo "renaming old logfile"
-mv gpslog.txt  "gpslog.$(date +%F_%R).txt "
+#echo "renaming old logfile"
+#mv gpslog.txt  "gpslog$(date +%Y%m%d_%H%M).txt"
 
 
 echo "Launch GPSProbe"
-sudo python gpsprobe.py -i wlan1mon -t iso  -o  gpslog.txt -f -s -r -l -g
+#sudo python gpsprobe.py -i wlan1mon -t iso  -o  gpslog.txt -f -s -r -l -u -g 
+(sudo python gpsprobe.py -i wlan1mon -t iso  -o  gpslog.txt -f -s -r -u -g ) || stty sane || (sleep 0.5s) || (source ../gpsprobe.sh)
+
+stty sane
 
 
 printf "${STOP}"
