@@ -1,12 +1,4 @@
-<PRE>
-   ____ ____  ____  ____  ____   ___  ____  _____                 
-  / ___|  _ \/ ___||  _ \|  _ \ / _ \| __ )| ____|                          
- | |  _| |_) \___ \| |_) | |_) | | | |  _ \|  _|                            
- | |_| |  __/ ___) |  __/|  _ <| |_| | |_) | |___                           
-  \____|_|   |____/|_|   |_| \_\\___/|____/|_____|                          
- </PRE>                                                                            
-
-
+![Raspberry Pi Buildout](https://github.com/datagod/gpsprobe/blob/master/GPSProbe%20Logo.jpg)
 
 ![Raspberry Pi Buildout](https://github.com/datagod/gpsprobe/blob/master/GPSProbe%20Pi3.jpg)
 
