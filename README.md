@@ -38,7 +38,11 @@ An example of GPSProbe running on a Raspberry Pi3 with an external Wifi antenna,
 
 
 # Sample Output
+Details of the captured packets are shown in a series of ncurses windows.  
+
 ![Sample Output](https://github.com/datagod/gpsprobe/blob/master/images/GPSlog.jpg?raw=true)
+
+![Sample Output2](https://github.com/datagod/gpsprobe/blob/master/images/GPSLog TextWindow.jpg?raw=true)
 
 
 # Dependencies
