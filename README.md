@@ -1,12 +1,4 @@
-<PRE>
-   ____ ____  ____  ____  ____   ___  ____  _____                 
-  / ___|  _ \/ ___||  _ \|  _ \ / _ \| __ )| ____|                          
- | |  _| |_) \___ \| |_) | |_) | | | |  _ \|  _|                            
- | |_| |  __/ ___) |  __/|  _ <| |_| | |_) | |___                           
-  \____|_|   |____/|_|   |_| \_\\___/|____/|_____|                          
- </PRE>                                                                            
-
-
+![Raspberry Pi Buildout](https://github.com/datagod/gpsprobe/blob/master/GPSProbe%20Logo.jpg)
 
 ![Raspberry Pi Buildout](https://github.com/datagod/gpsprobe/blob/master/GPSProbe%20Pi3.jpg)
 
@@ -46,7 +38,12 @@ An example of GPSProbe running on a Raspberry Pi3 with an external Wifi antenna,
 
 
 # Sample Output
+Details of the captured packets are shown in a series of ncurses windows.  
+
 ![Sample Output](https://github.com/datagod/gpsprobe/blob/master/images/GPSlog.jpg?raw=true)
+
+![Sample Output2](https://github.com/datagod/gpsprobe/blob/master/GPSLog%20TextWindows.jpg?)
+
 
 
 # Dependencies
