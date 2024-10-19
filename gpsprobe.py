@@ -65,6 +65,9 @@
 #   - added new record count, total database records, etc.                   --
 #   - added ability to scroll through recent non-friendly records            --
 #------------------------------------------------------------------------------
+#  Oct 19, 2024                                                              --
+#   - adapting for dual wifi                                                 --
+#------------------------------------------------------------------------------
 
 
 # To Do:
