@@ -85,6 +85,7 @@ from __future__ import print_function
 
 from datetime import datetime, timedelta 
 import argparse
+import os
 import netaddr
 import sys
 import logging
@@ -101,7 +102,7 @@ from datetime import datetime, timedelta
 import time
 import threading
 from threading import Event, Thread
-from configparser import SafeConfigParser
+from configparser import ConfigParser
 
 #Database support
 import sqlite3
@@ -224,9 +225,10 @@ if(args.mobileonly):
 else:
   MobileOnly = False
 
+# Unicorn HAT / Arcade Retro Clock display is disabled.
 if (args.unicornhat):
-  import arcaderetroclock
-  HatDisplay = True
+  print("Unicorn HAT display is disabled; ignoring --unicornhat")
+HatDisplay = False
 
 DEBUG = args.debug
 
@@ -1323,17 +1325,7 @@ def ChangeChannel(iface):
 
         
 
-      #Display heartbeat every channel change
-      #if (CheckElapsedTime(HeartBeatStartTime, HeartBeatSeconds +1) == 1):
-        r,g,b = arcaderetroclock.getpixel(15,0)
-    
-        #if yellow, make black.  Else make yellow (yes, I said that!)
-        if (r == 120 and g == 120 and b == 0):
-          arcaderetroclock.setpixel(15,0,0,0,0)
-        else:
-          arcaderetroclock.setpixel(15,0,120,120,0)
-          
-      #HeartBeatStartTime = time.time() + HeartBeatSeconds    
+      # Unicorn HAT heartbeat is disabled.    
 
 
 
@@ -1356,28 +1348,7 @@ def findSSID(pkt):
 #--------------------------------------
 # Create sprites                     --
 #--------------------------------------
-
-StatusBarRouter = arcaderetroclock.Sprite(
-  16,
-  1,
-  100,
-  0,
-  0,
-  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-)
-
-StatusBarRouter.BarLength = 0
-
-
-StatusBarMobile = arcaderetroclock.Sprite(
-  16,
-  1,
-  0,
-  0,
-  200,
-  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-)
-StatusBarMobile.BarLength = 0
+# Unicorn HAT sprites skipped; display is disabled.
 
 
 
@@ -1408,11 +1379,11 @@ def SaveConfigData():
 
   
   if (os.path.exists(ConfigFileName)):
-    ConfigFile = SafeConfigParser()
+    ConfigFile = ConfigParser()
     ConfigFile.read(ConfigFileName)
   else:
     #print ("Config file not found.  Creating new one.")
-    ConfigFile = SafeConfigParser()
+    ConfigFile = ConfigParser()
     ConfigFile.read(ConfigFileName)
     ConfigFile.add_section('main')
     ConfigFile.add_section('pacdot')
@@ -1434,7 +1405,7 @@ def LoadConfigData():
   #print ("--Load Config Data------------")
     
   if (os.path.exists(ConfigFileName)):
-    ConfigFile = SafeConfigParser()
+    ConfigFile = ConfigParser()
     ConfigFile.read(ConfigFileName)
 
     #Get and set time    
@@ -1497,6 +1468,52 @@ def CheckElapsedTime(start_time, seconds):
 
  
  
+def init_schema(conn):
+  cur = conn.cursor()
+  cur.execute("""
+    create table if not exists LogImport (
+      DateTime     text,
+      Lat          real,
+      Lon          real,
+      Signal       real,
+      Channel      integer,
+      PktType      integer,
+      Device       string,
+      MACAddress   string,
+      FriendlyName string,
+      Vendor       string,
+      SSID         string
+    )
+  """)
+  cur.execute("""
+    create table if not exists GPSLog (
+      DateTime     text,
+      Lat          real,
+      Lon          real,
+      Signal       real,
+      Channel      integer,
+      PktType      integer,
+      Device       string,
+      MACAddress   string,
+      FriendlyName string,
+      Vendor       string,
+      SSID         string
+    )
+  """)
+  cur.execute("create index if not exists i_GPSLog_DateTime on GPSLog(DateTime)")
+  cur.execute("create index if not exists i_GPSLog_FriendlyName on GPSLog(FriendlyName)")
+  cur.execute("create index if not exists i_GPSLog_MACAddress on GPSLog(MACAddress)")
+  cur.execute("""
+    create table if not exists FriendlyName (
+      ID           integer primary key,
+      MACAddress   string,
+      FriendlyName string
+    )
+  """)
+  cur.execute("create index if not exists i_FriendlyName_MACAddress on FriendlyName(MACAddress)")
+  conn.commit()
+
+
 def create_connection(db_file):
   """ create a database connection to the SQLite database
       specified by db_file
@@ -1505,7 +1522,9 @@ def create_connection(db_file):
   """
   conn = None
   try:
-      conn = sqlite3.connect(db_file)
+      os.makedirs(os.path.dirname(db_file), exist_ok=True)
+      conn = sqlite3.connect(db_file, check_same_thread=False)
+      init_schema(conn)
   except Error as e:
       FinalCleanup(stdscr)
       print(e)
@@ -1871,10 +1890,8 @@ def ProcessKeypress(Key):
 
   elif (Key == "i"):
     IPAddress = ShowIPAddress()
-    arcaderetroclock.ShowScrollingBannerV(IPAddress,0,225,0,3,0.03)
 
   elif (Key == "q"):
-    arcaderetroclock.ShowScrollingBannerV("Quit!",200,0,0,3,0.02)
     FinalCleanup(stdscr)
 
     os._exit(1)
@@ -1899,38 +1916,19 @@ def ProcessKeypress(Key):
     #repopulate the friendlyname table to incorporate changes
     #FriendlyCount = PopulateFriendlyName(FriendlyNameList)
   elif (Key == "r"):
-    arcaderetroclock.ShowScrollingBannerV("Reboot!",100,0,0,3,0.01)
     FinalCleanup(stdscr)
     os.execl(sys.executable, sys.executable, *sys.argv)
-  elif (Key == "1"):
-    print ("Setting brightness 100%")
-    arcaderetroclock.unicorn.brightness(1)
-  elif (Key == "2"):
-    print ("Setting brightness 75%")
-    arcaderetroclock.unicorn.brightness(0.75)
-  elif (Key == "3"):
-    print ("Setting brightness 50%")
-    arcaderetroclock.unicorn.brightness(0.5)
-  elif (Key == "4"):
-    print ("Setting brightness 25%")
-    arcaderetroclock.unicorn.brightness(0.25)
-  elif (Key == "5"):
-    print ("Setting brightness 0%")
-    arcaderetroclock.unicorn.brightness(0)
   elif (Key == "6"):
     print ("--Report 6: distinct devices ")
     ShowDistinctDevices(conn)
-    arcaderetroclock.ShowScrollingBannerV("Distinct Devices",200,0,0,3,0.01)
 
   elif (Key == "7"):
     print ("--Report 7: All unknown devices")
     ShowUnknownDevices(conn)
-    arcaderetroclock.ShowScrollingBannerV("unknown devices",200,0,0,3,0.01)
 
   elif (Key == "8"):
     print ("--Report 8: 30 recent devices")
     ShowRecentDevices(conn)
-    arcaderetroclock.ShowScrollingBannerV("Recent devices",200,0,0,3,0.01)
 
   elif (Key == "9"):
     
@@ -2024,7 +2022,6 @@ def ErrorHandler(ErrorMessage,TraceMessage,AdditionalInfo):
   print("--------------------------------------------------------------")
   print("")
   print("")
-  arcaderetroclock.ShowScrollingBannerV("ERROR DETECTED!",255,0,0,3,0.03)
 
 
 
@@ -2071,8 +2068,11 @@ LoadConfigData()
 #--------------------
 # Setup Database   --
 #--------------------
-database = "/home/pi/sqlite/GPSProbe"  
+database = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sqlite", "GPSProbe")
 conn = create_connection(database)
+if conn is None:
+  FinalCleanup(stdscr)
+  sys.exit("Failed to open database: " + database)
  
 
 #-------------------------------

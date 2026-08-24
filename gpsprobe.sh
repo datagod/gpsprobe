@@ -26,7 +26,7 @@ sudo airmon-ng check kill
 
 echo "Launch GPSProbe"
 #sudo python gpsprobe.py -i wlan1mon -t iso  -o  gpslog.txt -f -s -r -l -u -g 
-(sudo python gpsprobe.py -i wlan1mon -t iso  -o  gpslog.txt -f -s -r -u -g ) || stty sane || (sleep 0.5s) || (source ../gpsprobe.sh)
+(sudo python3 gpsprobe.py -i wlan1mon -t iso  -o  gpslog.txt -f -s -r -g ) || stty sane || (sleep 0.5s) || (source ../gpsprobe.sh)
 
 stty sane
 

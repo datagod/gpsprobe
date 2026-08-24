@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+ProbeConfig.ini
+gpslog.txt
+probemon.log
+sqlite/GPSProbe
+sqlite/GPSProbe-journal
